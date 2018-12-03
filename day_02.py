@@ -1,11 +1,6 @@
 from typing import List
 
-def ReadData():
-	data = []
-	with open("./data/day_02.txt", "r") as f:
-		for line in f:
-			data.append(line.strip())
-	return data
+import util
 
 def part1(inputs):
 	two = 0
@@ -25,24 +20,24 @@ def part1(inputs):
 		two += hasTwo
 		three += hasThree
 
-	print(two, three, two*three)
+	util.Answer(1, two*three)
 
 def part2(inputs):
 	for left in inputs:
 		for right in inputs:
 			if left == right:
 				continue
-			diff = 0
+			common = []
 			for i in range(len(left)):
-				if left[i] != right[i]:
-					diff += 1
-				if diff >=2:
+				if left[i] == right[i]:
+					common.append(left[i])
+				if len(common) < i:
 					break
-			if diff == 1:
-				print(left,right)
+			if len(common) == len(left) - 1:
+				util.Answer(2, "".join(common))
 				return
 
 if __name__ == "__main__":
-	inputs = ReadData()
+	inputs = util.ReadData(2)
 	part1(inputs)
 	part2(inputs)
