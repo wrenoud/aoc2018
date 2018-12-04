@@ -2,7 +2,12 @@ from typing import List
 
 
 def ReadData(day:int) -> List[str]:
-	with open("./data/day_{:02}.txt".format(day)) as f:
+	with open("./data/day_{:02}/puzzle.txt".format(day)) as f:
+		return f.readlines()
+
+
+def ReadTestData(day:int) -> List[str]:
+	with open("./data/day_{:02}/test.txt".format(day)) as f:
 		return f.readlines()
 
 
@@ -12,6 +17,7 @@ def Answer(part, answer):
 
 class AdventOfCodeDay:
 	pass
+
 
 if __name__ == "__main__":
 	print(ReadData(3))
