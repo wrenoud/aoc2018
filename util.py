@@ -5,6 +5,7 @@ import requests
 
 
 def get_session():
+	"""loads a adventofcode.com session cookie from env.json"""
 	env = json.load(open('env.json'))	
 	cookie = requests.cookies.create_cookie(name='session', value=env['session'])
 	sess = requests.session()
@@ -16,8 +17,13 @@ def ReadData(day:int) -> List[str]:
 	filepath = "./data/puzzle_{:02}.txt".format(day)
 	
 	if not os.path.exists(filepath):
+		print("Downloading from adventofcode.com")
 		url = "https://adventofcode.com/2018/day/{}/input".format(day)
-		puzzle = get_session().get(url).text.strip()
+		res = get_session().get(url)
+		if res.status_code != 200:
+			print("*** error downloading ***")
+			return None
+		puzzle = res.text.strip()
 		with open(filepath, 'w') as f:
 			f.write(puzzle)
 		return puzzle.split('\n')
