@@ -1,10 +1,9 @@
 import util
-
-import numpy as np
+from blist import blist
 
 
 def Play(players, marbles):
-	board = np.array([0])
+	board = blist([0])
 	player = 0
 	scores = [0]*players
 	current = 0
@@ -12,10 +11,11 @@ def Play(players, marbles):
 		if marble % 23 == 0:
 			current = (current-7) % len(board)
 			scores[player] += marble + board[current]
-			board = np.concatenate((board[:current],board[current+1:]),0)
+			del board[current]
 		else:
 			current = (current+2) % len(board)
-			board = np.concatenate((board[:current],[marble],board[current:]),0)
+			#board = board[:current] + blist([marble,]) + board[current:]
+			board.insert(current, marble)
 		player = (player + 1) % players
 		if marble % int(marbles/1000) == 0:
 			print(marble/int(marbles/100), "%", marble, current)
