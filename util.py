@@ -1,4 +1,5 @@
 import os
+import sys
 import json
 from typing import List
 import requests
@@ -30,6 +31,11 @@ def ReadData(day:int) -> List[str]:
 		
 	with open(filepath) as f:
 		return f.read().split('\n')
+
+
+def ReadPuzzle():
+	day = sys.argv[0].split('_')[-1].split('.')[0]
+	return ReadData(int(day))
 
 
 def Answer(part, answer):

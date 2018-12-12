@@ -43,10 +43,6 @@ def part1(inputs):
 		print(guard, maxsleep, totalsleep)
 
 if __name__ == "__main__":
-	test, answer = util.ReadTestData(4)
-	inputs = FormatData(test)
-	part1(inputs)
-	print("---")
 	inputs = FormatData(util.ReadData(4))
 	part1(inputs)
 	
